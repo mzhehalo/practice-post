@@ -7,12 +7,9 @@ class Content extends Component {
 
     doLike = (Like) => {
         this.props.doLike(Like);
-        console.log(Like);
-        // this.setState(this.props.content.like)
     };
 
     render() {
-        console.log(this.props);
         return (
             <div>
                 <p>{this.props.selected.title}</p>
@@ -21,10 +18,7 @@ class Content extends Component {
                 <p>{this.props.selected.content}</p>
                 <p>{this.props.selected.date}</p>
                 <p>Кількість: {this.props.selected.like}</p>
-                {/*{this.props.state.map(like =>)}*/}
-                {/*<p>{this.props.likes}</p>*/}
                 <button onClick={(e) => this.doLike(this.props.selected.id)}>Like</button>
-                {/*{console.log(this.props.state.like)}*/}
             </div>
         )
     }

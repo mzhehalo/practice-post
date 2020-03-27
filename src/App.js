@@ -40,33 +40,16 @@ class App extends Component {
                 like: 0
             }
         ],
-        selected: null,
+        selectedId: null,
         renderCmp: true,
+        content: ''
     };
 
-    // componentDidMount() {
-    //     setInterval(()=> console.log('didMount '+ this.state.arrContent[0].title),2000)
-    // }
-
-    // componentWillUnmount() {
-    //     console.log('will Mount')
-    // }
-
     handleClick = (post) => {
-        // this.setState({selected: post});
-        this.setState({selected: post});
-        // let newArr2 = this.state.arrContent.map(obj => {
-        //     return (
-        //         obj.id === post.id ? {...obj} : obj)
-        // });
-        //
-        // this.setState({arrContent: newArr2});
-        // console.log(newArr2)
-        console.log(post)
+        this.setState({selectedId: post});
     };
 
     doLike = (arrId) => {
-        console.log(arrId);
 
         let newArr = this.state.arrContent.map(obj => {
             return (
@@ -74,12 +57,17 @@ class App extends Component {
         });
 
         this.setState({arrContent: newArr});
-        // this.setState({selected: this.state.arrContent.like});
-
-        console.log('click')
     };
 
     render() {
+
+        if(this.state.selectedId) {
+            let newArr2 = this.state.arrContent.find(arrContent =>
+                    arrContent.id === this.state.selectedId.id);
+
+            this.state.content = newArr2
+        }
+
         return (
             <div className="wrapper">
                 <div className='bg-post'>
@@ -87,8 +75,8 @@ class App extends Component {
                 </div>
 
                 <div className={'bg-content'}>
-                    {this.state.selected &&
-                    <Content selected={this.state.selected} doLike={this.doLike}
+                    {this.state.selectedId &&
+                    <Content selected={this.state.content} doLike={this.doLike}
                              state={this.state.arrContent}/>}
                 </div>
             </div>
